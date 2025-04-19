@@ -309,10 +309,15 @@ EOF'
 echo "Enabling short_open_tag in php.ini..."
 sudo sed -i 's/^short_open_tag = Off/short_open_tag = On/' /etc/php/8.1/fpm/php.ini
 
-sudo rm -rf /var/www/html/*
-sudo cp -r $HOME/server/website/* /var/www/html
-sudo chown -R www-data:www-data /var/www/html
-sudo chmod -R 755 /var/www/html
+if [ ! -f /var/www/html/website_done ]; then
+    echo "Initializing website..."
+    sudo rm -rf /var/www/html/*
+    sudo cp -r $HOME/server/website/* /var/www/html
+    sudo chown -R www-data:www-data /var/www/html
+    sudo chmod -R 755 /var/www/html
+    sudo touch /var/www/html/website_done
+fi
+echo "Website configured."
 
 # Configure php-fpm to log to console
 sudo mkdir -p /usr/local/etc/php-fpm.d
