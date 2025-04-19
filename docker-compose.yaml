@@ -14,6 +14,7 @@ services:
       - ${CLIENT_DATA_PATH}:/home/mangos/server/client-data:U
       - ${DB_PATH}:/var/lib/mysql:U
       - ${ETC_PATH}:/home/mangos/server/run/etc:U
+      - ${WEB_PATH}:/var/www/html
     ports:
       - "${GAME_SERVER_PORT:?err}:8085"
       - "${REALM_DAEMON_PORT:?err}:3724"
